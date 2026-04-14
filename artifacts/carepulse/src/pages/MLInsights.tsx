@@ -119,7 +119,7 @@ function HealthRiskTab() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div>
               <Label>Age</Label>
-              <Input data-testid="input-age" type="number" value={form.age} onChange={(e) => setForm((f) => ({ ...f, age: +e.target.value }))} min={1} max={120} />
+              <Input data-testid="input-age" type="number" value={form.age || ""} onChange={(e) => setForm((f) => ({ ...f, age: e.target.value === "" ? 0 : +e.target.value }))} min={1} max={120} />
             </div>
             <div>
               <Label>Gender</Label>
@@ -133,23 +133,23 @@ function HealthRiskTab() {
             </div>
             <div>
               <Label>BMI</Label>
-              <Input data-testid="input-bmi" type="number" step="0.1" value={form.bmi} onChange={(e) => setForm((f) => ({ ...f, bmi: +e.target.value }))} min={10} max={60} />
+              <Input data-testid="input-bmi" type="number" step="0.1" value={form.bmi || ""} onChange={(e) => setForm((f) => ({ ...f, bmi: e.target.value === "" ? 0 : +e.target.value }))} min={10} max={60} />
             </div>
             <div>
               <Label>Systolic BP (mmHg)</Label>
-              <Input data-testid="input-systolic" type="number" value={form.systolicBP} onChange={(e) => setForm((f) => ({ ...f, systolicBP: +e.target.value }))} min={60} max={250} />
+              <Input data-testid="input-systolic" type="number" value={form.systolicBP || ""} onChange={(e) => setForm((f) => ({ ...f, systolicBP: e.target.value === "" ? 0 : +e.target.value }))} min={60} max={250} />
             </div>
             <div>
               <Label>Diastolic BP (mmHg)</Label>
-              <Input data-testid="input-diastolic" type="number" value={form.diastolicBP} onChange={(e) => setForm((f) => ({ ...f, diastolicBP: +e.target.value }))} min={40} max={180} />
+              <Input data-testid="input-diastolic" type="number" value={form.diastolicBP || ""} onChange={(e) => setForm((f) => ({ ...f, diastolicBP: e.target.value === "" ? 0 : +e.target.value }))} min={40} max={180} />
             </div>
             <div>
               <Label>Heart Rate (bpm)</Label>
-              <Input data-testid="input-heartrate" type="number" value={form.heartRate} onChange={(e) => setForm((f) => ({ ...f, heartRate: +e.target.value }))} min={30} max={200} />
+              <Input data-testid="input-heartrate" type="number" value={form.heartRate || ""} onChange={(e) => setForm((f) => ({ ...f, heartRate: e.target.value === "" ? 0 : +e.target.value }))} min={30} max={200} />
             </div>
             <div>
               <Label>Blood Sugar (mg/dL)</Label>
-              <Input data-testid="input-bloodsugar" type="number" value={form.bloodSugar} onChange={(e) => setForm((f) => ({ ...f, bloodSugar: +e.target.value }))} min={40} max={500} />
+              <Input data-testid="input-bloodsugar" type="number" value={form.bloodSugar || ""} onChange={(e) => setForm((f) => ({ ...f, bloodSugar: e.target.value === "" ? 0 : +e.target.value }))} min={40} max={500} />
             </div>
             <div className="flex items-end gap-3">
               <div className="flex-1">
