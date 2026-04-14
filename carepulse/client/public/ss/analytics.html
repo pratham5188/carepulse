@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>CarePulse - Predictive Analytics</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex min-h-screen bg-slate-100">
+<aside class="w-64 bg-white border-r border-slate-200 flex flex-col h-screen fixed shadow-sm">
+  <div class="px-5 py-4 border-b border-slate-100 flex items-center gap-2">
+    <div class="w-8 h-8 rounded-xl bg-blue-600 flex items-center justify-center"><span class="text-white text-sm font-bold">C</span></div>
+    <div><div class="font-bold text-slate-800 text-sm">CarePulse</div><div class="text-xs text-slate-400">Healthcare Analytics</div></div>
+  </div>
+  <nav class="flex-1 p-3 space-y-1">
+    <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 text-sm" href="#">⊞ Dashboard</a>
+    <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 text-sm" href="#">👥 Patients</a>
+    <a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-blue-50 text-blue-700 font-medium text-sm" href="#">📊 Predictive Analytics</a>
+    <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 text-sm" href="#">🧠 AI Insights</a>
+    <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 text-sm" href="#">🏥 Compliance</a>
+  </nav>
+</aside>
+<main class="ml-64 flex-1 p-6">
+  <h1 class="text-2xl font-bold text-slate-800 mb-2">Predictive Analytics</h1>
+  <p class="text-slate-500 text-sm mb-5">ML-powered population health analysis and risk stratification</p>
+  <!-- Tabs -->
+  <div class="flex gap-1 mb-6 bg-white rounded-xl p-1 shadow-sm border border-slate-100 w-fit">
+    <button class="px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-medium">Population</button>
+    <button class="px-4 py-2 rounded-lg text-slate-600 text-sm">Patient Risk</button>
+    <button class="px-4 py-2 rounded-lg text-slate-600 text-sm">Clinical Decision</button>
+    <button class="px-4 py-2 rounded-lg text-slate-600 text-sm">Resources</button>
+    <button class="px-4 py-2 rounded-lg text-slate-600 text-sm">Model AI</button>
+  </div>
+  <!-- Stats Row -->
+  <div class="grid grid-cols-4 gap-4 mb-5">
+    <div class="bg-white rounded-xl p-4 shadow-sm border border-slate-100 text-center"><div class="text-2xl font-bold text-blue-600">1,284</div><div class="text-xs text-slate-500 mt-1">Total Patients</div></div>
+    <div class="bg-white rounded-xl p-4 shadow-sm border border-slate-100 text-center"><div class="text-2xl font-bold text-red-600">247</div><div class="text-xs text-slate-500 mt-1">High Risk</div></div>
+    <div class="bg-white rounded-xl p-4 shadow-sm border border-slate-100 text-center"><div class="text-2xl font-bold text-yellow-600">413</div><div class="text-xs text-slate-500 mt-1">Moderate Risk</div></div>
+    <div class="bg-white rounded-xl p-4 shadow-sm border border-slate-100 text-center"><div class="text-2xl font-bold text-green-600">624</div><div class="text-xs text-slate-500 mt-1">Low Risk</div></div>
+  </div>
+  <!-- Charts -->
+  <div class="grid grid-cols-2 gap-5 mb-5">
+    <div class="bg-white rounded-xl p-5 shadow-sm border border-slate-100">
+      <h3 class="font-semibold text-slate-700 mb-4">Age Distribution by Risk Level</h3>
+      <!-- Bar chart mock -->
+      <div class="flex items-end gap-3 h-36 border-b border-l border-slate-200 pt-4 pl-2">
+        <div class="flex flex-col items-center gap-1 flex-1"><div class="w-full bg-green-400 rounded-t" style="height:55%"></div><div class="text-xs text-slate-500">0-18</div></div>
+        <div class="flex flex-col items-center gap-1 flex-1"><div class="w-full bg-yellow-400 rounded-t" style="height:60%"></div><div class="text-xs text-slate-500">19-35</div></div>
+        <div class="flex flex-col items-center gap-1 flex-1"><div class="w-full bg-orange-400 rounded-t" style="height:80%"></div><div class="text-xs text-slate-500">36-50</div></div>
+        <div class="flex flex-col items-center gap-1 flex-1"><div class="w-full bg-red-500 rounded-t" style="height:100%"></div><div class="text-xs text-slate-500">51-65</div></div>
+        <div class="flex flex-col items-center gap-1 flex-1"><div class="w-full bg-red-700 rounded-t" style="height:90%"></div><div class="text-xs text-slate-500">65+</div></div>
+      </div>
+    </div>
+    <div class="bg-white rounded-xl p-5 shadow-sm border border-slate-100">
+      <h3 class="font-semibold text-slate-700 mb-4">Disease Outbreak Predictions</h3>
+      <div class="space-y-3">
+        <div class="flex items-center justify-between p-3 rounded-lg bg-red-50"><div><div class="font-medium text-sm text-slate-700">Dengue</div><div class="text-xs text-slate-500">Delhi region - 34 cases/week</div></div><span class="text-xs font-bold text-red-600 bg-red-100 px-2 py-1 rounded-full">↑ Rising</span></div>
+        <div class="flex items-center justify-between p-3 rounded-lg bg-yellow-50"><div><div class="font-medium text-sm text-slate-700">Malaria</div><div class="text-xs text-slate-500">Mumbai region - 18 cases/week</div></div><span class="text-xs font-bold text-yellow-600 bg-yellow-100 px-2 py-1 rounded-full">→ Stable</span></div>
+        <div class="flex items-center justify-between p-3 rounded-lg bg-green-50"><div><div class="font-medium text-sm text-slate-700">Typhoid</div><div class="text-xs text-slate-500">Chennai region - 7 cases/week</div></div><span class="text-xs font-bold text-green-600 bg-green-100 px-2 py-1 rounded-full">↓ Falling</span></div>
+      </div>
+    </div>
+  </div>
+</main>
+</body></html>

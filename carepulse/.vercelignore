@@ -1,0 +1,16 @@
+node_modules
+dist
+.env
+.env.local
+*.log
+report_assets
+attached_assets
+script
+tests
+carepulse/*.zip
+seed_all.cjs
+seed_all.js
+extracted_locations.json
+LOCAL_SETUP.md
+render.yaml
+api/index.mjs

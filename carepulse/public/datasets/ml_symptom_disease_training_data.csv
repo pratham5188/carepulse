@@ -1,0 +1,42 @@
+symptoms,diagnosis,category,severity_score
+"chest pain shortness of breath sweating nausea radiating arm pain","Acute Coronary Syndrome","Cardiovascular",9
+"severe chest pain pressure tightness jaw pain left arm numbness","Myocardial Infarction","Cardiovascular",10
+"palpitations rapid heartbeat irregular pulse dizziness fainting","Cardiac Arrhythmia","Cardiovascular",7
+"high blood pressure headache vision changes dizziness nosebleed","Hypertensive Crisis","Cardiovascular",8
+"leg swelling pain redness warmth calf tenderness","Deep Vein Thrombosis","Cardiovascular",8
+"sudden breathlessness chest pain coughing blood rapid pulse","Pulmonary Embolism","Cardiovascular",10
+"high fever headache body aches fatigue cough sore throat chills","Influenza","Respiratory",4
+"persistent cough fever shortness of breath chest pain fatigue","Pneumonia","Respiratory",7
+"wheezing breathlessness chest tightness cough night worsening","Asthma Exacerbation","Respiratory",6
+"chronic cough sputum production breathlessness exercise intolerance","COPD Exacerbation","Respiratory",7
+"persistent cough blood sputum weight loss night sweats fever","Pulmonary Tuberculosis","Respiratory",8
+"runny nose sneezing sore throat mild cough congestion low fever","Upper Respiratory Infection","Respiratory",2
+"excessive thirst frequent urination blurred vision fatigue weight loss","Diabetes Mellitus","Endocrine",5
+"confusion sweating trembling rapid heartbeat hunger irritability","Hypoglycemia","Endocrine",7
+"nausea vomiting abdominal pain fruity breath confusion rapid breathing","Diabetic Ketoacidosis","Endocrine",9
+"weight gain fatigue cold intolerance dry skin constipation depression","Hypothyroidism","Endocrine",4
+"weight loss anxiety tremor heat intolerance rapid heartbeat sweating","Hyperthyroidism","Endocrine",5
+"high fever rash behind eyes pain joint pain muscle pain platelet drop","Dengue Fever","Infectious",7
+"cyclic fever chills rigors sweating headache anemia spleen enlarged","Malaria","Infectious",8
+"high fever abdominal pain rose spots constipation diarrhea headache","Typhoid Fever","Infectious",7
+"fever cough loss of taste smell fatigue body aches sore throat","COVID-19","Infectious",6
+"fever rash joint pain muscle pain conjunctivitis headache","Chikungunya","Infectious",6
+"burning urination frequency urgency cloudy urine pelvic pain","Urinary Tract Infection","Urological",4
+"severe flank pain radiating groin blood urine nausea vomiting","Kidney Stones","Urological",7
+"severe headache one side throbbing nausea light sensitivity aura","Migraine","Neurological",6
+"sudden severe headache worst ever stiff neck confusion vomiting","Subarachnoid Hemorrhage","Neurological",10
+"sudden facial droop arm weakness speech difficulty balance loss","Ischemic Stroke","Neurological",10
+"tremor rigidity bradykinesia postural instability shuffling gait","Parkinson Disease","Neurological",6
+"severe abdominal pain right lower quadrant nausea vomiting fever","Appendicitis","Gastrointestinal",8
+"jaundice abdominal pain nausea fatigue dark urine","Hepatitis","Gastrointestinal",7
+"upper abdominal pain bloating nausea heartburn worse food","Peptic Ulcer Disease","Gastrointestinal",5
+"joint pain swelling stiffness morning worse small joints symmetric","Rheumatoid Arthritis","Musculoskeletal",6
+"bone pain fracture height loss stooped posture","Osteoporosis","Musculoskeletal",5
+"persistent sadness loss interest sleep changes appetite changes fatigue hopelessness","Major Depressive Disorder","Psychiatric",6
+"excessive worry restlessness muscle tension sleep difficulty concentration problems","Generalized Anxiety Disorder","Psychiatric",5
+"panic attacks heart racing sweating trembling fear of dying chest pain","Panic Disorder","Psychiatric",6
+"irregular periods acne weight gain excess hair growth pelvic pain","PCOS","Gynecological",4
+"heavy periods pain cramps fatigue iron deficiency anemia","Menorrhagia","Gynecological",5
+"itchy rash red patches scaling dry skin eczema flaking","Dermatitis","Dermatological",3
+"fatigue pale skin weakness dizziness cold hands shortness breath","Iron Deficiency Anemia","Hematological",5
+"swollen lymph nodes fever night sweats weight loss fatigue","Lymphoma","Oncological",8

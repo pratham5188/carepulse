@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>CarePulse - Compliance</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex min-h-screen bg-slate-100">
+<aside class="w-64 bg-white border-r border-slate-200 flex flex-col h-screen fixed shadow-sm">
+  <div class="px-5 py-4 border-b border-slate-100 flex items-center gap-2">
+    <div class="w-8 h-8 rounded-xl bg-blue-600 flex items-center justify-center"><span class="text-white text-sm font-bold">C</span></div>
+    <div><div class="font-bold text-slate-800 text-sm">CarePulse</div><div class="text-xs text-slate-400">Healthcare Analytics</div></div>
+  </div>
+  <nav class="flex-1 p-3 space-y-1">
+    <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 text-sm" href="#">⊞ Dashboard</a>
+    <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 text-sm" href="#">📊 Analytics</a>
+    <a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-blue-50 text-blue-700 font-medium text-sm" href="#">🏥 Compliance &amp; Benchmarks</a>
+  </nav>
+</aside>
+<main class="ml-64 flex-1 p-6">
+  <h1 class="text-2xl font-bold text-slate-800 mb-1">Compliance &amp; Benchmarks</h1>
+  <p class="text-slate-500 text-sm mb-4">HIPAA compliance monitoring, data pipeline, and cross-hospital analytics</p>
+  <div class="flex gap-1 mb-5 bg-white rounded-xl p-1 shadow-sm border border-slate-100 w-fit">
+    <button class="px-4 py-1.5 rounded-lg bg-blue-600 text-white text-sm font-medium">HIPAA Compliance</button>
+    <button class="px-4 py-1.5 rounded-lg text-slate-600 text-sm">Data Pipeline</button>
+    <button class="px-4 py-1.5 rounded-lg text-slate-600 text-sm">Hospital Benchmarks</button>
+  </div>
+  <div class="grid grid-cols-2 gap-4 mb-5">
+    <div class="bg-white rounded-xl p-5 shadow-sm border border-slate-100">
+      <h3 class="font-semibold text-slate-700 mb-3">HIPAA Compliance Indicators</h3>
+      <div class="space-y-2">
+        <div class="flex items-center justify-between p-2.5 rounded-lg bg-green-50">
+          <span class="text-sm text-slate-700">Role-Based Access Control (RBAC)</span>
+          <span class="text-xs font-medium text-green-700 bg-green-100 px-2 py-0.5 rounded-full">Compliant</span>
+        </div>
+        <div class="flex items-center justify-between p-2.5 rounded-lg bg-green-50">
+          <span class="text-sm text-slate-700">Audit Logging</span>
+          <span class="text-xs font-medium text-green-700 bg-green-100 px-2 py-0.5 rounded-full">Compliant</span>
+        </div>
+        <div class="flex items-center justify-between p-2.5 rounded-lg bg-green-50">
+          <span class="text-sm text-slate-700">Hospital Data Isolation</span>
+          <span class="text-xs font-medium text-green-700 bg-green-100 px-2 py-0.5 rounded-full">Compliant</span>
+        </div>
+        <div class="flex items-center justify-between p-2.5 rounded-lg bg-green-50">
+          <span class="text-sm text-slate-700">Session Management</span>
+          <span class="text-xs font-medium text-green-700 bg-green-100 px-2 py-0.5 rounded-full">Compliant</span>
+        </div>
+        <div class="flex items-center justify-between p-2.5 rounded-lg bg-yellow-50">
+          <span class="text-sm text-slate-700">Data Encryption at Rest</span>
+          <span class="text-xs font-medium text-yellow-700 bg-yellow-100 px-2 py-0.5 rounded-full">Partial</span>
+        </div>
+        <div class="flex items-center justify-between p-2.5 rounded-lg bg-green-50">
+          <span class="text-sm text-slate-700">HTTPS / TLS Transport</span>
+          <span class="text-xs font-medium text-green-700 bg-green-100 px-2 py-0.5 rounded-full">Compliant</span>
+        </div>
+        <div class="flex items-center justify-between p-2.5 rounded-lg bg-green-50">
+          <span class="text-sm text-slate-700">Password Hashing (bcrypt)</span>
+          <span class="text-xs font-medium text-green-700 bg-green-100 px-2 py-0.5 rounded-full">Compliant</span>
+        </div>
+        <div class="flex items-center justify-between p-2.5 rounded-lg bg-yellow-50">
+          <span class="text-sm text-slate-700">Multi-Factor Authentication</span>
+          <span class="text-xs font-medium text-yellow-700 bg-yellow-100 px-2 py-0.5 rounded-full">Review</span>
+        </div>
+        <div class="flex items-center justify-between p-2.5 rounded-lg bg-green-50">
+          <span class="text-sm text-slate-700">PHI De-identification (Benchmarks)</span>
+          <span class="text-xs font-medium text-green-700 bg-green-100 px-2 py-0.5 rounded-full">Compliant</span>
+        </div>
+        <div class="flex items-center justify-between p-2.5 rounded-lg bg-yellow-50">
+          <span class="text-sm text-slate-700">Breach Notification Protocol</span>
+          <span class="text-xs font-medium text-yellow-700 bg-yellow-100 px-2 py-0.5 rounded-full">Review</span>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white rounded-xl p-5 shadow-sm border border-slate-100">
+      <h3 class="font-semibold text-slate-700 mb-3">Compliance Score</h3>
+      <div class="flex items-center justify-center h-32 mb-4">
+        <div class="text-center">
+          <div class="text-5xl font-bold text-green-600">76%</div>
+          <div class="text-sm text-slate-500 mt-1">Overall HIPAA Score</div>
+        </div>
+      </div>
+      <div class="grid grid-cols-3 gap-2 text-center">
+        <div class="bg-green-50 rounded-lg p-2"><div class="text-lg font-bold text-green-600">7</div><div class="text-xs text-slate-500">Compliant</div></div>
+        <div class="bg-yellow-50 rounded-lg p-2"><div class="text-lg font-bold text-yellow-600">3</div><div class="text-xs text-slate-500">Partial/Review</div></div>
+        <div class="bg-red-50 rounded-lg p-2"><div class="text-lg font-bold text-red-600">0</div><div class="text-xs text-slate-500">Non-Compliant</div></div>
+      </div>
+      <div class="mt-4 p-3 bg-slate-50 rounded-lg">
+        <h4 class="text-xs font-semibold text-slate-600 mb-2">Recent Audit Activity</h4>
+        <div class="space-y-1 text-xs text-slate-500">
+          <div>• testdoctor@carepulse.test logged in — 2 min ago</div>
+          <div>• Patient record accessed: ID 142 — 5 min ago</div>
+          <div>• Appointment cancelled: ID 87 — 12 min ago</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+</body></html>

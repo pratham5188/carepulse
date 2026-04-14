@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>CarePulse - MedAssist AI</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex min-h-screen bg-slate-100">
+<aside class="w-64 bg-white border-r border-slate-200 flex flex-col h-screen fixed shadow-sm">
+  <div class="px-5 py-4 border-b border-slate-100 flex items-center gap-2">
+    <div class="w-8 h-8 rounded-xl bg-blue-600 flex items-center justify-center"><span class="text-white text-sm font-bold">C</span></div>
+    <div><div class="font-bold text-slate-800 text-sm">CarePulse</div><div class="text-xs text-slate-400">Healthcare Analytics</div></div>
+  </div>
+  <nav class="flex-1 p-3 space-y-1">
+    <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 text-sm" href="#">⊞ Dashboard</a>
+    <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 text-sm" href="#">👥 Patients</a>
+    <a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-blue-50 text-blue-700 font-medium text-sm" href="#">🤖 MedAssist AI</a>
+    <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 text-sm" href="#">💊 Drug Interactions</a>
+    <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 text-sm" href="#">🩺 Symptom Checker</a>
+  </nav>
+</aside>
+<main class="ml-64 flex-1 p-6">
+  <h1 class="text-2xl font-bold text-slate-800 mb-1">MedAssist AI</h1>
+  <p class="text-slate-500 text-sm mb-5">Gemini-powered clinical decision support chatbot</p>
+  <div class="bg-white rounded-xl shadow-sm border border-slate-100 h-[calc(100vh-160px)] flex flex-col">
+    <!-- Chat header -->
+    <div class="px-5 py-4 border-b border-slate-100 flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold">AI</div>
+      <div><div class="font-semibold text-slate-800">MedAssist</div><div class="text-xs text-green-500">● Online — Gemini Pro powered</div></div>
+    </div>
+    <!-- Chat messages -->
+    <div class="flex-1 overflow-y-auto p-5 space-y-4">
+      <!-- AI message -->
+      <div class="flex gap-3 max-w-2xl">
+        <div class="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center text-blue-600 text-xs font-bold flex-shrink-0">AI</div>
+        <div class="bg-slate-100 rounded-2xl rounded-tl-none px-4 py-3 text-sm text-slate-700">
+          Hello! I'm MedAssist, your clinical AI assistant. I can help you with patient case analysis, drug interactions, differential diagnoses, and evidence-based treatment guidelines. How can I assist you today?
+        </div>
+      </div>
+      <!-- User message -->
+      <div class="flex gap-3 max-w-2xl ml-auto flex-row-reverse">
+        <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">Dr</div>
+        <div class="bg-blue-600 text-white rounded-2xl rounded-tr-none px-4 py-3 text-sm">
+          My patient has Type 2 Diabetes with HbA1c of 8.5% and eGFR of 42. What are the safest treatment options?
+        </div>
+      </div>
+      <!-- AI response -->
+      <div class="flex gap-3 max-w-2xl">
+        <div class="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center text-blue-600 text-xs font-bold flex-shrink-0">AI</div>
+        <div class="bg-slate-100 rounded-2xl rounded-tl-none px-4 py-3 text-sm text-slate-700 space-y-2">
+          <p>Given your patient's <strong>CKD Stage 3b</strong> (eGFR 42) with poorly controlled diabetes:</p>
+          <p><strong>Recommended approach:</strong></p>
+          <ul class="list-disc pl-4 space-y-1">
+            <li>SGLT2 inhibitors (e.g., Empagliflozin) — renoprotective, safe at this eGFR</li>
+            <li>GLP-1 agonists (e.g., Semaglutide) — no dose adjustment needed</li>
+            <li>Avoid Metformin if eGFR falls below 30; reduce dose now</li>
+          </ul>
+          <p class="text-xs text-slate-500 mt-2">⚕ Always verify against current patient medications and consult specialist if needed.</p>
+        </div>
+      </div>
+    </div>
+    <!-- Input -->
+    <div class="px-4 py-3 border-t border-slate-100 flex gap-3">
+      <input class="flex-1 px-4 py-2 bg-slate-100 rounded-xl text-sm text-slate-700 border-none outline-none" placeholder="Ask a clinical question..." value=""/>
+      <button class="px-4 py-2 bg-blue-600 text-white rounded-xl text-sm font-medium">Send</button>
+    </div>
+  </div>
+</main>
+</body></html>
