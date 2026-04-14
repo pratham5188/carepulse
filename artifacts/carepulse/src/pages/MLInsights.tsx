@@ -78,8 +78,8 @@ function HealthRiskTab() {
       const res = await apiRequest("POST", "/api/ml/health-risk", data);
       return res.json();
     },
-    onError: (err: Error) => {
-      toast({ title: "Prediction failed", description: err.message, variant: "destructive" });
+    onError: () => {
+      toast({ title: "Prediction failed", variant: "destructive" });
     },
   });
 
@@ -287,8 +287,8 @@ function AppointmentRecommendTab() {
       });
       return res.json();
     },
-    onError: (err: Error) => {
-      toast({ title: "Failed", description: err.message, variant: "destructive" });
+    onError: () => {
+      toast({ title: "Recommendation failed", variant: "destructive" });
     },
   });
 
@@ -431,8 +431,8 @@ function ReportSummarizerTab() {
       setResult(data);
       toast({ title: "Report analyzed successfully!" });
     },
-    onError: (err: Error) => {
-      toast({ title: "Analysis failed", description: err.message, variant: "destructive" });
+    onError: () => {
+      toast({ title: "Analysis failed", variant: "destructive" });
     },
   });
 
