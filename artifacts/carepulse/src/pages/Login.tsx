@@ -44,7 +44,6 @@ export default function Login() {
   const [forgotLoading, setForgotLoading] = useState(false);
   const [resetLoading, setResetLoading] = useState(false);
   const [resetSuccess, setResetSuccess] = useState(false);
-  const [fallbackOtp, setFallbackOtp] = useState<string | null>(null);
 
   const { login, register, isLoggingIn, isRegistering } = useAuth();
   const { toast } = useToast();
@@ -123,14 +122,11 @@ export default function Login() {
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.message);
-      setFallbackOtp(data.fallbackOtp || null);
-      if (data.fallbackOtp) {
-        setOtpCode(data.fallbackOtp);
-      }
+      setOtpCode("");
       setPageView("otp");
       toast({
-        title: "OTP Ready",
-        description: "Your OTP is shown on screen and has been sent to your email.",
+        title: "OTP Sent",
+        description: `A 6-digit verification code has been sent to ${forgotEmail}. Check your inbox and spam folder.`,
       });
     } catch (err: any) {
       setError(err.message || "Failed to send OTP");
@@ -482,30 +478,11 @@ export default function Login() {
                   </form>
                 ) : (
                   <form onSubmit={handleResetPassword} className="space-y-4">
-                    {fallbackOtp ? (
-                      <div className="space-y-2">
-                        <div className="p-3 bg-green-50 dark:bg-green-900/20 border border-green-300 dark:border-green-700 rounded-xl text-center">
-                          <p className="text-xs font-semibold text-green-700 dark:text-green-300 uppercase tracking-wider mb-1">Your OTP Code</p>
-                          <div className="bg-white dark:bg-gray-900 border-2 border-dashed border-green-400 rounded-lg py-2 px-4 inline-block">
-                            <span className="text-3xl font-mono font-bold tracking-[0.6em] text-green-600 dark:text-green-400 select-all">
-                              {fallbackOtp}
-                            </span>
-                          </div>
-                          <p className="text-xs text-green-600 dark:text-green-400 mt-1">
-                            This code is pre-filled below. Valid for 10 minutes.
-                          </p>
-                        </div>
-                        <p className="text-xs text-muted-foreground text-center">
-                          Also sent to <strong>{forgotEmail}</strong> — check inbox &amp; spam.
-                        </p>
-                      </div>
-                    ) : (
-                      <div className="p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl">
-                        <p className="text-sm text-blue-700 dark:text-blue-300 text-center">
-                          A 6-digit OTP has been sent to <strong>{forgotEmail}</strong>. Check your inbox and spam folder.
-                        </p>
-                      </div>
-                    )}
+                    <div className="p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl">
+                      <p className="text-sm text-blue-700 dark:text-blue-300 text-center">
+                        A 6-digit OTP has been sent to <strong>{forgotEmail}</strong>. Check your inbox and spam folder.
+                      </p>
+                    </div>
                     <div>
                       <label className="text-sm font-medium text-foreground mb-1.5 block">Verification Code</label>
                       <input
@@ -513,7 +490,7 @@ export default function Login() {
                         value={otpCode}
                         onChange={(e) => setOtpCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
                         className="w-full px-4 py-2.5 sm:py-3 rounded-xl border border-border bg-card focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-center text-lg font-mono tracking-[0.4em]"
-                        placeholder="000000"
+                        placeholder="Enter 6-digit code"
                         maxLength={6}
                         required
                       />
@@ -587,18 +564,12 @@ export default function Login() {
                             });
                             const data = await res.json();
                             if (!res.ok) throw new Error(data.message);
-                            if (data.fallbackOtp) {
-                              setFallbackOtp(data.fallbackOtp);
-                              setOtpCode(data.fallbackOtp);
-                            }
+                            setOtpCode("");
                             toast({
-                              title: data.emailDeliveryFailed ? "Email Unavailable" : "OTP Resent",
-                              description: data.emailDeliveryFailed
-                                ? "Email delivery failed. Your new OTP is shown below."
-                                : otpMethod === "sms"
-                                  ? "A new verification code has been sent to your mobile."
-                                  : "A new verification code has been sent to your email.",
-                              variant: data.emailDeliveryFailed ? "destructive" : "default",
+                              title: "OTP Resent",
+                              description: otpMethod === "sms"
+                                ? "A new verification code has been sent to your mobile."
+                                : "A new verification code has been sent to your email. Check your inbox and spam folder.",
                             });
                           } catch (err: any) {
                             setError(err.message || "Failed to resend OTP");

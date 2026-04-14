@@ -81,13 +81,13 @@ export async function registerRoutes(
           user = await authStorage.getUserByEmail(email);
         }
         if (!user) {
-          return res.json({ message: "If an account exists with this mobile number, an OTP has been sent.", otpSent: true });
+          return res.status(404).json({ message: "No account found with this mobile number. Please register first.", otpSent: false });
         }
         userEmail = user.email!;
       } else {
         user = await authStorage.getUserByEmail(email);
         if (!user) {
-          return res.json({ message: "If an account exists with this email, an OTP has been sent.", otpSent: true });
+          return res.status(404).json({ message: "No account found with this email. Please register first.", otpSent: false });
         }
         userEmail = email;
       }
@@ -119,11 +119,9 @@ export async function registerRoutes(
 
       res.json({
         message: otpMethod === "sms"
-          ? "If an account exists with this mobile number, an OTP has been sent."
-          : "If an account exists with this email, an OTP has been sent.",
+          ? "OTP has been sent to your mobile number."
+          : "OTP has been sent to your email address.",
         otpSent: true,
-        // Always return OTP on screen so user is never blocked by email delivery issues
-        fallbackOtp: otp,
         emailDeliveryFailed: deliveryFailed,
       });
     } catch (error) {
