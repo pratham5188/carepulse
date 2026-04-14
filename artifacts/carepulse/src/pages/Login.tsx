@@ -12,7 +12,7 @@ interface HospitalOption {
   state: string;
 }
 
-type PageView = "login" | "register" | "forgot";
+type PageView = "login" | "register" | "forgot" | "otp";
 
 export default function Login() {
   const [isRegister, setIsRegister] = useState(false);
@@ -35,11 +35,16 @@ export default function Login() {
 
   const [error, setError] = useState("");
   const [forgotEmail, setForgotEmail] = useState("");
+  const [forgotPhone, setForgotPhone] = useState("");
+  const [otpMethod, setOtpMethod] = useState<"email" | "sms">("email");
+  const [otpCode, setOtpCode] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showNewPassword, setShowNewPassword] = useState(false);
+  const [forgotLoading, setForgotLoading] = useState(false);
   const [resetLoading, setResetLoading] = useState(false);
   const [resetSuccess, setResetSuccess] = useState(false);
+  const [fallbackOtp, setFallbackOtp] = useState<string | null>(null);
 
   const { login, register, isLoggingIn, isRegistering } = useAuth();
   const { toast } = useToast();
@@ -102,11 +107,43 @@ export default function Login() {
     }
   };
 
-  const handleResetPassword = async (e: React.FormEvent) => {
+  const handleSendOtp = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     if (!forgotEmail) {
       setError("Please enter your email address");
+      return;
+    }
+    setForgotLoading(true);
+    try {
+      const res = await fetch("/api/forgot-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: forgotEmail, method: "email" }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message);
+      setFallbackOtp(data.fallbackOtp || null);
+      if (data.fallbackOtp) {
+        setOtpCode(data.fallbackOtp);
+      }
+      setPageView("otp");
+      toast({
+        title: "OTP Ready",
+        description: "Your OTP is shown on screen and has been sent to your email.",
+      });
+    } catch (err: any) {
+      setError(err.message || "Failed to send OTP");
+    } finally {
+      setForgotLoading(false);
+    }
+  };
+
+  const handleResetPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    if (otpCode.length !== 6) {
+      setError("Please enter a valid 6-digit OTP");
       return;
     }
     if (newPassword.length < 6) {
@@ -119,10 +156,11 @@ export default function Login() {
     }
     setResetLoading(true);
     try {
+      const resetBody = { email: forgotEmail, otp: otpCode, newPassword };
       const res = await fetch("/api/reset-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: forgotEmail, newPassword }),
+        body: JSON.stringify(resetBody),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.message);
@@ -140,6 +178,7 @@ export default function Login() {
     setIsRegister(false);
     setError("");
     setForgotEmail("");
+    setOtpCode("");
     setNewPassword("");
     setConfirmPassword("");
     setResetSuccess(false);
