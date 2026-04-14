@@ -78,8 +78,8 @@ function HealthRiskTab() {
       const res = await apiRequest("POST", "/api/ml/health-risk", data);
       return res.json();
     },
-    onError: () => {
-      toast({ title: "Prediction failed", variant: "destructive" });
+    onError: (err: Error) => {
+      toast({ title: "Prediction failed", description: err.message, variant: "destructive" });
     },
   });
 
@@ -760,8 +760,8 @@ function DeepLearningTab() {
       setDtResult(dt);
       setMlpResult(mlp);
       setFairness(fair);
-    } catch {
-      toast({ title: "Prediction failed", variant: "destructive" });
+    } catch (err) {
+      toast({ title: "Prediction failed", description: (err as Error).message, variant: "destructive" });
     } finally { setLoading(false); }
   };
 

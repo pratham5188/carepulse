@@ -357,6 +357,29 @@ export async function registerRoutes(
   });
 
   // === ML Predictions API ===
+
+  // Maps health parameter field names to display labels and valid ranges
+  const healthParamRanges: Record<string, { label: string; min: number; max: number; unit?: string }> = {
+    age:         { label: "Age",          min: 1,  max: 120, unit: "years" },
+    bmi:         { label: "BMI",          min: 10, max: 60 },
+    systolicBP:  { label: "Systolic BP",  min: 60, max: 250, unit: "mmHg" },
+    diastolicBP: { label: "Diastolic BP", min: 40, max: 180, unit: "mmHg" },
+    heartRate:   { label: "Heart Rate",   min: 30, max: 200, unit: "bpm" },
+    bloodSugar:  { label: "Blood Sugar",  min: 40, max: 500, unit: "mg/dL" },
+  };
+
+  function formatHealthParamError(errors: any[]): string {
+    for (const err of errors) {
+      const field = String(err.path?.[0] ?? "");
+      const info = healthParamRanges[field];
+      if (info) {
+        const unit = info.unit ? ` ${info.unit}` : "";
+        return `${info.label} must be between ${info.min}–${info.max}${unit}`;
+      }
+    }
+    return "Invalid health parameters";
+  }
+
   app.post("/api/ml/health-risk", isAuthenticated, async (req, res) => {
     try {
       const schema = z.object({
@@ -375,10 +398,10 @@ export async function registerRoutes(
       res.json(result);
     } catch (error: any) {
       if (error?.name === "ZodError") {
-        return res.status(400).json({ message: "Invalid health parameters", errors: error.errors });
+        return res.status(400).json({ message: formatHealthParamError(error.errors) });
       }
       console.error("Health risk prediction error:", error);
-      res.status(500).json({ message: "Failed to predict health risk" });
+      res.status(500).json({ message: "Prediction failed. Please try again." });
     }
   });
 
