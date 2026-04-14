@@ -116,41 +116,53 @@ function HealthRiskTab() {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div>
-              <Label>Age</Label>
-              <Input data-testid="input-age" type="number" value={form.age || ""} onChange={(e) => setForm((f) => ({ ...f, age: e.target.value === "" ? 0 : +e.target.value }))} min={1} max={120} />
-            </div>
-            <div>
-              <Label>Gender</Label>
-              <Select value={form.gender} onValueChange={(v) => setForm((f) => ({ ...f, gender: v as "male" | "female" }))}>
-                <SelectTrigger data-testid="select-gender"><SelectValue /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="male">Male</SelectItem>
-                  <SelectItem value="female">Female</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div>
-              <Label>BMI</Label>
-              <Input data-testid="input-bmi" type="number" step="0.1" value={form.bmi || ""} onChange={(e) => setForm((f) => ({ ...f, bmi: e.target.value === "" ? 0 : +e.target.value }))} min={10} max={60} />
-            </div>
-            <div>
-              <Label>Systolic BP (mmHg)</Label>
-              <Input data-testid="input-systolic" type="number" value={form.systolicBP || ""} onChange={(e) => setForm((f) => ({ ...f, systolicBP: e.target.value === "" ? 0 : +e.target.value }))} min={60} max={250} />
-            </div>
-            <div>
-              <Label>Diastolic BP (mmHg)</Label>
-              <Input data-testid="input-diastolic" type="number" value={form.diastolicBP || ""} onChange={(e) => setForm((f) => ({ ...f, diastolicBP: e.target.value === "" ? 0 : +e.target.value }))} min={40} max={180} />
-            </div>
-            <div>
-              <Label>Heart Rate (bpm)</Label>
-              <Input data-testid="input-heartrate" type="number" value={form.heartRate || ""} onChange={(e) => setForm((f) => ({ ...f, heartRate: e.target.value === "" ? 0 : +e.target.value }))} min={30} max={200} />
-            </div>
-            <div>
-              <Label>Blood Sugar (mg/dL)</Label>
-              <Input data-testid="input-bloodsugar" type="number" value={form.bloodSugar || ""} onChange={(e) => setForm((f) => ({ ...f, bloodSugar: e.target.value === "" ? 0 : +e.target.value }))} min={40} max={500} />
-            </div>
+          {(() => {
+            const rangeErr = (val: number, min: number, max: number, label: string, unit: string) =>
+              val !== 0 && (val < min || val > max)
+                ? <p className="text-[11px] text-red-500 mt-0.5">{label}: {min}–{max} {unit}</p>
+                : null;
+            return (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div>
+                  <Label>Age</Label>
+                  <Input data-testid="input-age" type="number" value={form.age || ""} onChange={(e) => setForm((f) => ({ ...f, age: e.target.value === "" ? 0 : +e.target.value }))} min={1} max={120} className={form.age !== 0 && (form.age < 1 || form.age > 120) ? "border-red-400 focus-visible:ring-red-400" : ""} />
+                  {rangeErr(form.age, 1, 120, "Valid range", "years")}
+                </div>
+                <div>
+                  <Label>Gender</Label>
+                  <Select value={form.gender} onValueChange={(v) => setForm((f) => ({ ...f, gender: v as "male" | "female" }))}>
+                    <SelectTrigger data-testid="select-gender"><SelectValue /></SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="male">Male</SelectItem>
+                      <SelectItem value="female">Female</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div>
+                  <Label>BMI</Label>
+                  <Input data-testid="input-bmi" type="number" step="0.1" value={form.bmi || ""} onChange={(e) => setForm((f) => ({ ...f, bmi: e.target.value === "" ? 0 : +e.target.value }))} min={10} max={60} className={form.bmi !== 0 && (form.bmi < 10 || form.bmi > 60) ? "border-red-400 focus-visible:ring-red-400" : ""} />
+                  {rangeErr(form.bmi, 10, 60, "Valid range", "")}
+                </div>
+                <div>
+                  <Label>Systolic BP (mmHg)</Label>
+                  <Input data-testid="input-systolic" type="number" value={form.systolicBP || ""} onChange={(e) => setForm((f) => ({ ...f, systolicBP: e.target.value === "" ? 0 : +e.target.value }))} min={60} max={250} className={form.systolicBP !== 0 && (form.systolicBP < 60 || form.systolicBP > 250) ? "border-red-400 focus-visible:ring-red-400" : ""} />
+                  {rangeErr(form.systolicBP, 60, 250, "Valid range", "mmHg")}
+                </div>
+                <div>
+                  <Label>Diastolic BP (mmHg)</Label>
+                  <Input data-testid="input-diastolic" type="number" value={form.diastolicBP || ""} onChange={(e) => setForm((f) => ({ ...f, diastolicBP: e.target.value === "" ? 0 : +e.target.value }))} min={40} max={180} className={form.diastolicBP !== 0 && (form.diastolicBP < 40 || form.diastolicBP > 180) ? "border-red-400 focus-visible:ring-red-400" : ""} />
+                  {rangeErr(form.diastolicBP, 40, 180, "Valid range", "mmHg")}
+                </div>
+                <div>
+                  <Label>Heart Rate (bpm)</Label>
+                  <Input data-testid="input-heartrate" type="number" value={form.heartRate || ""} onChange={(e) => setForm((f) => ({ ...f, heartRate: e.target.value === "" ? 0 : +e.target.value }))} min={30} max={200} className={form.heartRate !== 0 && (form.heartRate < 30 || form.heartRate > 200) ? "border-red-400 focus-visible:ring-red-400" : ""} />
+                  {rangeErr(form.heartRate, 30, 200, "Valid range", "bpm")}
+                </div>
+                <div>
+                  <Label>Blood Sugar (mg/dL)</Label>
+                  <Input data-testid="input-bloodsugar" type="number" value={form.bloodSugar || ""} onChange={(e) => setForm((f) => ({ ...f, bloodSugar: e.target.value === "" ? 0 : +e.target.value }))} min={40} max={500} className={form.bloodSugar !== 0 && (form.bloodSugar < 40 || form.bloodSugar > 500) ? "border-red-400 focus-visible:ring-red-400" : ""} />
+                  {rangeErr(form.bloodSugar, 40, 500, "Valid range", "mg/dL")}
+                </div>
             <div className="flex items-end gap-3">
               <div className="flex-1">
                 <Label>Smoking</Label>
@@ -161,6 +173,8 @@ function HealthRiskTab() {
               </div>
             </div>
           </div>
+            );
+          })()}
 
           <div className="mt-4">
             <Label>Family History</Label>
