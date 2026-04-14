@@ -48,136 +48,31 @@ export async function registerRoutes(
     }
   });
 
-  // === Forgot Password / Reset Password with OTP ===
+  // === Reset Password (no OTP required) ===
   app.post("/api/forgot-password", async (req, res) => {
-    try {
-      const { email, phone, method } = req.body;
-      const otpMethod = method === "sms" ? "sms" : "email";
-
-      if (otpMethod === "sms" && !phone) {
-        return res.status(400).json({ message: "Mobile number is required" });
-      }
-      if (otpMethod === "email" && !email) {
-        return res.status(400).json({ message: "Email is required" });
-      }
-
-      const { authStorage } = await import("./replit_integrations/auth/storage");
-      const { users } = await import("../shared/models/auth");
-      const { eq } = await import("drizzle-orm");
-
-      let user;
-      let userEmail: string;
-
-      if (otpMethod === "sms") {
-        const cleanPhone = phone.replace(/\D/g, "").replace(/^91/, "");
-        const [found] = await db.select().from(users).where(eq(users.phone, cleanPhone)).limit(1);
-        if (!found) {
-          const [found2] = await db.select().from(users).where(eq(users.phone, `+91${cleanPhone}`)).limit(1);
-          user = found2;
-        }  else {
-          user = found;
-        }
-        if (!user && email) {
-          user = await authStorage.getUserByEmail(email);
-        }
-        if (!user) {
-          return res.json({ message: "If an account exists with this mobile number, an OTP has been sent.", otpSent: true });
-        }
-        userEmail = user.email!;
-      } else {
-        user = await authStorage.getUserByEmail(email);
-        if (!user) {
-          return res.json({ message: "If an account exists with this email, an OTP has been sent.", otpSent: true });
-        }
-        userEmail = email;
-      }
-
-      const { passwordResetOtps } = await import("../shared/models/auth");
-      const otp = String(Math.floor(100000 + Math.random() * 900000));
-      const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
-
-      await db.insert(passwordResetOtps).values({ email: userEmail, otp, expiresAt });
-
-      const userName = user.firstName || undefined;
-
-      let deliveryFailed = false;
-
-      if (otpMethod === "sms") {
-        const userPhone = phone || user.phone;
-        const smsSent = await sendOTPSMS(userPhone, otp, userName);
-        if (!smsSent) {
-          console.error(`[OTP] Failed to send SMS to ${userPhone}`);
-          deliveryFailed = true;
-        }
-      } else {
-        const emailSent = await sendOTPEmail(userEmail, otp, userName);
-        if (!emailSent) {
-          console.error(`[OTP] Failed to send email to ${userEmail}`);
-          deliveryFailed = true;
-        }
-      }
-
-      res.json({
-        message: otpMethod === "sms"
-          ? "If an account exists with this mobile number, an OTP has been sent."
-          : "If an account exists with this email, an OTP has been sent.",
-        otpSent: true,
-        // Always return OTP on screen so user is never blocked by email delivery issues
-        fallbackOtp: otp,
-        emailDeliveryFailed: deliveryFailed,
-      });
-    } catch (error) {
-      console.error("Forgot password error:", error);
-      res.status(500).json({ message: "Failed to process request" });
-    }
+    res.json({ message: "Proceed to reset your password.", otpSent: true });
   });
 
   app.post("/api/reset-password", async (req, res) => {
     try {
-      const { email, phone, otp, newPassword } = req.body;
-      let resolvedEmail = email;
+      const { email, newPassword } = req.body;
 
-      if (!resolvedEmail && phone) {
-        const { users } = await import("../shared/models/auth");
-        const { eq } = await import("drizzle-orm");
-        const cleanPhone = phone.replace(/\D/g, "").replace(/^91/, "");
-        const [user] = await db.select().from(users).where(eq(users.phone, cleanPhone)).limit(1);
-        if (user?.email) resolvedEmail = user.email;
-      }
-
-      if (!resolvedEmail || !otp || !newPassword) {
-        return res.status(400).json({ message: "Email or phone, OTP, and new password are required" });
+      if (!email || !newPassword) {
+        return res.status(400).json({ message: "Email and new password are required" });
       }
       if (newPassword.length < 6) {
         return res.status(400).json({ message: "Password must be at least 6 characters" });
       }
 
-      const { passwordResetOtps } = await import("../shared/models/auth");
-      const { eq, and, gt } = await import("drizzle-orm");
-      const [otpRecord] = await db
-        .select()
-        .from(passwordResetOtps)
-        .where(
-          and(
-            eq(passwordResetOtps.email, resolvedEmail),
-            eq(passwordResetOtps.otp, otp),
-            eq(passwordResetOtps.used, "false"),
-            gt(passwordResetOtps.expiresAt, new Date())
-          )
-        )
-        .limit(1);
-
-      if (!otpRecord) {
-        return res.status(400).json({ message: "Invalid or expired OTP. Please request a new one." });
+      const { authStorage } = await import("./replit_integrations/auth/storage");
+      const user = await authStorage.getUserByEmail(email);
+      if (!user) {
+        return res.status(404).json({ message: "No account found with this email address" });
       }
 
       const bcrypt = await import("bcryptjs");
       const hashedPassword = await bcrypt.hash(newPassword, 12);
-
-      const { authStorage } = await import("./replit_integrations/auth/storage");
-      await authStorage.updateUserPassword(resolvedEmail, hashedPassword);
-
-      await db.update(passwordResetOtps).set({ used: "true" }).where(eq(passwordResetOtps.id, otpRecord.id));
+      await authStorage.updateUserPassword(email, hashedPassword);
 
       res.json({ message: "Password has been reset successfully. You can now sign in with your new password." });
     } catch (error) {
