@@ -6,3 +6,9 @@ id = "i2F9lBNme7MXIAvVQg78L"
 uri = "file://artifacts/carepulse/public/er-diagram.xml"
 type = "unspecified"
 title = "CarePulse ER Diagram (draw.io)"
+
+[[outputs]]
+id = "egvXZVSryqJA6TiZlzSnE"
+uri = "file://screenshots/er-diagram-corrected.jpg"
+type = "image"
+title = "CarePulse ER Diagram (Corrected)"
