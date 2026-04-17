@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CarePulse – ER Diagram</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <style>
+    body { margin: 0; background: #f8fafc; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; padding: 32px 16px; }
+    h1 { color: #1e293b; font-size: 1.4rem; margin-bottom: 24px; }
+    .diagram { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); max-width: 1100px; width: 100%; }
+  </style>
+</head>
+<body>
+  <h1>CarePulse — Entity Relationship Diagram</h1>
+  <div class="diagram">
+    <pre class="mermaid">
+erDiagram
+    USERS {
+        varchar id PK
+        varchar email
+        varchar password
+        varchar first_name
+        varchar last_name
+        varchar phone
+        varchar role
+        integer hospital_id
+    }
+
+    HOSPITALS {
+        serial id PK
+        text name
+        text state
+        text city
+        text location
+        integer bed_capacity
+        integer icu_capacity
+        integer current_occupancy
+    }
+
+    PATIENTS {
+        serial id PK
+        text name
+        integer age
+        text gender
+        text condition
+        text risk_level
+        integer hospital_id FK
+        timestamp admission_date
+    }
+
+    VITALS {
+        serial id PK
+        integer patient_id FK
+        integer heart_rate
+        text blood_pressure
+        integer oxygen_level
+        float temperature
+        timestamp timestamp
+    }
+
+    APPOINTMENTS {
+        serial id PK
+        text patient_name
+        text patient_email
+        varchar doctor_id FK
+        integer hospital_id FK
+        text date
+        text time
+        text status
+        text reason
+    }
+
+    PRESCRIPTIONS {
+        serial id PK
+        integer patient_id FK
+        varchar doctor_id FK
+        text patient_name
+        text doctor_name
+        text diagnosis
+        jsonb medications
+    }
+
+    CONVERSATIONS {
+        serial id PK
+        text title
+        timestamp created_at
+    }
+
+    MESSAGES {
+        serial id PK
+        integer conversation_id FK
+        text role
+        text content
+    }
+
+    AUDIT_LOGS {
+        serial id PK
+        varchar user_id
+        text user_email
+        text action
+        text details
+    }
+
+    DISEASE_TRENDS {
+        serial id PK
+        text disease_name
+        text location
+        integer case_count
+        timestamp timestamp
+    }
+
+    PASSWORD_RESET_OTPS {
+        varchar id PK
+        varchar email
+        varchar otp
+        timestamp expires_at
+    }
+
+    HOSPITALS ||--o{ PATIENTS : "has"
+    HOSPITALS ||--o{ APPOINTMENTS : "hosts"
+    PATIENTS ||--o{ VITALS : "has"
+    PATIENTS ||--o{ PRESCRIPTIONS : "has"
+    USERS ||--o{ APPOINTMENTS : "assigned to"
+    USERS ||--o{ PRESCRIPTIONS : "writes"
+    CONVERSATIONS ||--o{ MESSAGES : "contains"
+    </pre>
+  </div>
+  <script>
+    mermaid.initialize({ startOnLoad: true, theme: "default", er: { diagramPadding: 30 } });
+  </script>
+</body>
+</html>
