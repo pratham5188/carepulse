@@ -1,0 +1,8 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "i2F9lBNme7MXIAvVQg78L"
+uri = "file://artifacts/carepulse/public/er-diagram.xml"
+type = "unspecified"
+title = "CarePulse ER Diagram (draw.io)"
