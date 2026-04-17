@@ -12,3 +12,9 @@ id = "egvXZVSryqJA6TiZlzSnE"
 uri = "file://screenshots/er-diagram-corrected.jpg"
 type = "image"
 title = "CarePulse ER Diagram (Corrected)"
+
+[[outputs]]
+id = "D6X_shva9sJfrGwwMu1a3"
+uri = "file://screenshots/er-diagram-final.jpg"
+type = "image"
+title = "CarePulse ER Diagram (Final)"
