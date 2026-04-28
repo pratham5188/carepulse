@@ -499,8 +499,8 @@ export async function registerRoutes(
       const metrics = getModelMetrics();
       res.json({
         ...metrics,
-        modelName: "CarePulse Clinical NLP Engine v3.0",
-        architecture: "Naive Bayes + TF-IDF with 5-Fold Cross-Validation",
+        modelName: "CarePulse Clinical NLP Engine v3.1",
+        architecture: "Naive Bayes + TF-IDF with 5-Fold Cross-Validation (Macro-Averaged OVR Metrics)",
         trainingConditions: metrics.trainingSamples,
         diseases: ["Type 2 Diabetes", "Heart Disease", "Stroke", "Hypertension", "Kidney Disease"],
         validationMethod: "5-Fold Stratified Cross-Validation",

@@ -144,25 +144,32 @@ export function predictHealthRisk(params: HealthParams): HealthRiskResult {
     const riskPercent = clamp(Math.round(rawProb * 100), 1, 98);
 
     const factors: string[] = [];
-    if (params.age > 50) factors.push(`Age ${params.age} increases risk`);
-    if (params.bmi > 25) factors.push(`BMI ${params.bmi.toFixed(1)} (overweight) increases risk`);
-    if (params.bmi > 30) factors.push(`BMI ${params.bmi.toFixed(1)} (obese) significantly increases risk`);
-    if (params.systolicBP > 140) factors.push(`High systolic BP (${params.systolicBP} mmHg)`);
+    // Indian/South Asian age thresholds — metabolic risk starts earlier
+    if (params.age > 40) factors.push(`Age ${params.age} increases risk (South Asians develop metabolic diseases earlier)`);
+    // Indian BMI thresholds: ≥23 overweight, ≥27.5 obese (WHO Asia-Pacific / ICMR guidelines)
+    if (params.bmi >= 27.5) factors.push(`BMI ${params.bmi.toFixed(1)} (obese by Indian standard ≥27.5) significantly increases risk`);
+    else if (params.bmi >= 23) factors.push(`BMI ${params.bmi.toFixed(1)} (overweight by South Asian standard ≥23) increases risk`);
+    if (params.systolicBP > 140) factors.push(`High systolic BP (${params.systolicBP} mmHg) — above Stage 1 hypertension threshold`);
+    else if (params.systolicBP > 130) factors.push(`Elevated systolic BP (${params.systolicBP} mmHg) — pre-hypertension`);
     if (params.diastolicBP > 90) factors.push(`High diastolic BP (${params.diastolicBP} mmHg)`);
-    if (params.bloodSugar > 126) factors.push(`Elevated blood sugar (${params.bloodSugar} mg/dL)`);
-    if (params.smoking) factors.push("Smoking significantly increases risk");
-    if (hasFamilyHistory) factors.push(`Family history of ${disease}`);
-    if (params.heartRate > 100) factors.push(`Elevated heart rate (${params.heartRate} bpm)`);
+    if (params.bloodSugar >= 126) factors.push(`Diabetic blood sugar level (${params.bloodSugar} mg/dL ≥ 126 mg/dL threshold)`);
+    else if (params.bloodSugar >= 100) factors.push(`Pre-diabetic blood sugar (${params.bloodSugar} mg/dL, normal <100 mg/dL)`);
+    if (params.smoking) factors.push("Smoking significantly increases cardiovascular, respiratory, and metabolic risk");
+    if (hasFamilyHistory) factors.push(`Family history of ${disease} — genetic predisposition`);
+    if (params.heartRate > 100) factors.push(`Elevated heart rate (${params.heartRate} bpm) — resting tachycardia`);
+    else if (params.heartRate > 90) factors.push(`Mildly elevated resting heart rate (${params.heartRate} bpm)`);
 
     const recommendations: string[] = [];
     if (riskPercent >= 45) {
-      recommendations.push(`Consult a specialist for ${disease} screening`);
+      recommendations.push(`Consult a specialist for ${disease} screening and early intervention`);
     }
-    if (params.bmi > 25) recommendations.push("Maintain healthy weight through diet and exercise");
-    if (params.smoking) recommendations.push("Consider smoking cessation programs");
-    if (params.systolicBP > 130 || params.diastolicBP > 85) recommendations.push("Monitor blood pressure regularly");
-    if (params.bloodSugar > 100) recommendations.push("Get regular blood sugar tests");
-    if (params.heartRate > 90) recommendations.push("Regular cardiovascular exercise recommended");
+    // Indian BMI threshold recommendations
+    if (params.bmi >= 27.5) recommendations.push("Work with a nutritionist — target BMI <23 for South Asians (Indian standard)");
+    else if (params.bmi >= 23) recommendations.push("Healthy weight management — target BMI <23 for South Asians per ICMR guidelines");
+    if (params.smoking) recommendations.push("Smoking cessation is the single most impactful intervention — consult your doctor");
+    if (params.systolicBP > 130 || params.diastolicBP > 85) recommendations.push("Monitor blood pressure at home daily; target <130/80 mmHg");
+    if (params.bloodSugar >= 100) recommendations.push("Get HbA1c test to assess 3-month average blood sugar levels");
+    if (params.heartRate > 90) recommendations.push("Aerobic exercise (brisk walking 30 min/day) helps lower resting heart rate");
 
     predictions.push({
       disease,
@@ -179,16 +186,20 @@ export function predictHealthRisk(params: HealthParams): HealthRiskResult {
   const overallScore = Math.round(avgRisk);
 
   const generalRecommendations = [
-    "Schedule regular health checkups (at least annually)",
-    "Maintain a balanced diet rich in fruits, vegetables, and whole grains",
-    "Exercise for at least 150 minutes per week",
-    "Get 7-8 hours of quality sleep",
-    "Stay hydrated — drink at least 2-3 liters of water daily",
-    "Manage stress through meditation, yoga, or relaxation techniques",
+    "Schedule regular health checkups — at least annually, or every 6 months if any risk factors present",
+    "Follow a balanced Indian diet: include millets (ragi, jowar, bajra), legumes, vegetables, and limit refined carbs",
+    "Exercise for at least 150 minutes per week — brisk walking, yoga, swimming, or cycling",
+    "Get 7–8 hours of quality sleep; poor sleep increases insulin resistance and BP",
+    "Stay hydrated — drink at least 2–3 liters of water daily; avoid sugary beverages",
+    "Manage stress through pranayama, yoga, or meditation — high stress elevates cortisol and BP",
+    "Limit sodium intake to <5g/day (average Indian diet has 10–11g/day) — reduces HTN risk",
+    "Reduce tobacco and alcohol consumption; both are leading causes of preventable disease in India",
   ];
 
-  if (params.age > 40) generalRecommendations.push("Get annual cardiac screening after age 40");
-  if (params.bmi > 25) generalRecommendations.push("Work with a nutritionist for a personalized diet plan");
+  if (params.age > 35) generalRecommendations.push("Get fasting blood sugar + lipid panel done annually — diabetes/CVD onset is earlier in Indians");
+  if (params.age > 40) generalRecommendations.push("Annual cardiac and kidney function screening recommended after age 40");
+  if (params.bmi >= 23) generalRecommendations.push("Target BMI <23 — South Asian overweight threshold is lower than Western standard (WHO Asia-Pacific)");
+  if (params.bloodSugar >= 100) generalRecommendations.push("Consider HbA1c test — gives 3-month average blood glucose, better than single fasting reading");
 
   return {
     overallRisk: riskLevel(overallScore),

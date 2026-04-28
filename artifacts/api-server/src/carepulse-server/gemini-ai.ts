@@ -320,9 +320,10 @@ export async function chatWithAI(query: string): Promise<{ answer: string; discl
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash",
       contents: [
-        { role: "user", parts: [{ text: SYSTEM_PROMPT + "\n\nUser Query: " + query }] }
+        { role: "user", parts: [{ text: query }] }
       ],
       config: {
+        systemInstruction: SYSTEM_PROMPT,
         temperature: 0.6,
       }
     });

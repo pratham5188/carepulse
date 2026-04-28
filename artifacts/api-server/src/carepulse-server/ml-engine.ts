@@ -112,6 +112,76 @@ const clinicalTrainingData: { text: string; label: string; category: string; sev
   { text: "fatigue pale skin weakness dizziness cold hands shortness breath", label: "Iron Deficiency Anemia", category: "Hematological", severity: 5 },
   { text: "easy bruising prolonged bleeding fatigue petechiae purpura", label: "Thrombocytopenia", category: "Hematological", severity: 7 },
   { text: "swollen lymph nodes fever night sweats weight loss fatigue", label: "Lymphoma", category: "Oncological", severity: 8 },
+
+  // === India-Specific Disease Expansions ===
+  { text: "fever chills joint pain bone pain rash behind eyes platelet drop bleeding dengue", label: "Dengue Fever", category: "Infectious", severity: 7 },
+  { text: "cyclic fever rigors chills sweating headache anemia spleen enlargement mosquito bite malaria", label: "Malaria", category: "Infectious", severity: 8 },
+  { text: "high fever abdominal pain rose spots constipation diarrhea step-ladder fever typhoid", label: "Typhoid Fever", category: "Infectious", severity: 7 },
+  { text: "fever joint pain muscle pain rash conjunctivitis chikungunya mosquito", label: "Chikungunya", category: "Infectious", severity: 6 },
+  { text: "watery diarrhea rice water stool vomiting dehydration cramps cholera", label: "Cholera", category: "Infectious", severity: 8 },
+  { text: "fever jaundice dark urine pale stool hepatitis liver enlargement viral", label: "Viral Hepatitis A", category: "Gastrointestinal", severity: 6 },
+  { text: "fever skin yellowing itching liver damage blood transfusion hepatitis C", label: "Hepatitis C", category: "Gastrointestinal", severity: 7 },
+  { text: "scratch wound dog bite animal bite rabies neurological symptoms hydrophobia", label: "Rabies Exposure", category: "Infectious", severity: 10 },
+  { text: "skin rash nerve pain loss sensation numbness leprosy mycobacterium", label: "Leprosy (Hansen's Disease)", category: "Infectious", severity: 6 },
+  { text: "jaundice liver swelling high fever leptospirosis rat urine flood exposure", label: "Leptospirosis", category: "Infectious", severity: 7 },
+  { text: "scrub typhus fever rash eschar mite bite headache lymph node swelling", label: "Scrub Typhus", category: "Infectious", severity: 7 },
+
+  // === Additional Cardiovascular ===
+  { text: "exertional chest pain relieved rest angina nitroglycerin coronary artery", label: "Stable Angina", category: "Cardiovascular", severity: 6 },
+  { text: "sudden cardiac arrest no pulse no breathing CPR AED resuscitation", label: "Cardiac Arrest", category: "Cardiovascular", severity: 10 },
+  { text: "ankle swelling shortness breath orthopnea nocturnal dyspnea heart failure", label: "Congestive Heart Failure", category: "Cardiovascular", severity: 8 },
+
+  // === Additional Neurological ===
+  { text: "tremor resting slow movement rigidity shuffling gait Parkinson's", label: "Parkinson's Disease", category: "Neurological", severity: 7 },
+  { text: "memory loss confusion personality change dementia cognitive decline Alzheimer's", label: "Alzheimer's Disease", category: "Neurological", severity: 7 },
+  { text: "facial drooping one side Bell's palsy nerve inflammation viral", label: "Bell's Palsy", category: "Neurological", severity: 5 },
+
+  // === Additional Endocrine / Metabolic ===
+  { text: "weight gain swelling obesity metabolic syndrome insulin resistance abdominal fat", label: "Metabolic Syndrome", category: "Endocrine", severity: 5 },
+  { text: "sickle cell crisis bone pain anemia hemoglobin sickle cell thalassemia", label: "Sickle Cell Anemia", category: "Hematological", severity: 7 },
+  { text: "vitamin D deficiency bone pain muscle weakness rickets osteomalacia sunlight", label: "Vitamin D Deficiency", category: "Nutritional", severity: 4 },
+  { text: "vitamin B12 deficiency neurological numbness tingling megaloblastic anemia vegetarian", label: "Vitamin B12 Deficiency", category: "Nutritional", severity: 5 },
+
+  // === Additional Respiratory ===
+  { text: "cough sputum breathlessness barrel chest chronic obstructive COPD smoker", label: "COPD Exacerbation", category: "Respiratory", severity: 7 },
+  { text: "night sweats weight loss cough fever hemoptysis tuberculosis TB sputum AFB", label: "Pulmonary Tuberculosis", category: "Respiratory", severity: 8 },
+  { text: "allergic rhinitis sneezing runny nose itching eyes dust pollen allergy", label: "Allergic Rhinitis", category: "Respiratory", severity: 2 },
+
+  // === Additional Gastrointestinal ===
+  { text: "right upper quadrant pain gallstone fatty food intolerance nausea biliary colic", label: "Gallstones (Cholelithiasis)", category: "Gastrointestinal", severity: 5 },
+  { text: "hematemesis blood vomit black tarry stool melena upper GI bleed peptic ulcer", label: "Upper GI Hemorrhage", category: "Gastrointestinal", severity: 9 },
+  { text: "dysphagia difficulty swallowing weight loss esophageal cancer progressive", label: "Esophageal Carcinoma", category: "Oncological", severity: 9 },
+
+  // === Additional Renal/Urological ===
+  { text: "burning urination frequency urgency cloudy urine pelvic pain UTI bacteria", label: "Urinary Tract Infection", category: "Urological", severity: 4 },
+  { text: "protein urine swelling periorbital edema nephrotic syndrome low albumin", label: "Nephrotic Syndrome", category: "Renal", severity: 7 },
+  { text: "decreased urine output oliguria renal failure creatinine BUN elevated AKI", label: "Acute Kidney Injury", category: "Renal", severity: 8 },
+
+  // === Additional Gynecological / Obstetric ===
+  { text: "vaginal bleeding spotting ectopic pregnancy fallopian tube rupture shock", label: "Ectopic Pregnancy", category: "Gynecological", severity: 10 },
+  { text: "high blood pressure headache proteinuria swelling preeclampsia pregnancy complication", label: "Preeclampsia", category: "Obstetric", severity: 9 },
+  { text: "pelvic pain dysmenorrhea infertility endometriosis chocolate cyst ovary", label: "Endometriosis", category: "Gynecological", severity: 5 },
+
+  // === Additional Dermatological ===
+  { text: "white patches depigmentation vitiligo melanocytes skin autoimmune", label: "Vitiligo", category: "Dermatological", severity: 3 },
+  { text: "painful blisters shingles belt herpes zoster nerve pain postherpetic", label: "Herpes Zoster (Shingles)", category: "Infectious", severity: 6 },
+  { text: "red scaly plaques scalp elbows knees psoriasis chronic inflammatory", label: "Psoriasis", category: "Dermatological", severity: 4 },
+
+  // === Additional Oncological ===
+  { text: "lump breast nipple discharge skin dimpling breast cancer mammogram biopsy", label: "Breast Cancer", category: "Oncological", severity: 9 },
+  { text: "blood stool rectal bleeding change bowel habit colorectal cancer colonoscopy", label: "Colorectal Cancer", category: "Oncological", severity: 9 },
+  { text: "abnormal vaginal bleeding pap smear HPV cervical cancer colposcopy", label: "Cervical Cancer", category: "Oncological", severity: 9 },
+  { text: "oral ulcer non-healing biopsy tobacco betel nut oral cancer India", label: "Oral Cancer", category: "Oncological", severity: 9 },
+
+  // === Additional Pediatric ===
+  { text: "high fever febrile seizure child convulsion temperature pediatric", label: "Febrile Seizure", category: "Pediatric", severity: 6 },
+  { text: "malnourished stunting wasting underweight child kwashiorkor marasmus", label: "Protein Energy Malnutrition", category: "Nutritional", severity: 7 },
+  { text: "jaundice newborn neonatal hyperbilirubinemia phototherapy bilirubin", label: "Neonatal Jaundice", category: "Pediatric", severity: 5 },
+
+  // === Orthopedic / Rheumatological ===
+  { text: "uric acid gout big toe joint swelling painful red hot podagra", label: "Gout", category: "Musculoskeletal", severity: 5 },
+  { text: "morning stiffness synovitis rheumatoid factor anti-CCP joint erosion RA", label: "Rheumatoid Arthritis", category: "Musculoskeletal", severity: 6 },
+  { text: "butterfly rash malar rash lupus ANA SLE multisystem autoimmune", label: "Systemic Lupus Erythematosus", category: "Rheumatological", severity: 7 },
 ];
 
 function tokenize(text: string): string[] {
@@ -163,7 +233,7 @@ const modelState: ModelState = {
   documentCount: 0,
   classDocCounts: new Map(),
   trained: false,
-  version: "3.0.0",
+  version: "3.1.0",
   metrics: {
     accuracy: 0, precision: 0, recall: 0, f1Score: 0,
     specificity: 0, auc: 0,
@@ -235,7 +305,13 @@ function crossValidate(): ModelMetrics {
 
   let totalCorrect = 0;
   let totalSamples = 0;
-  let totalTP = 0, totalFP = 0, totalTN = 0, totalFN = 0;
+
+  // One-vs-rest macro-averaged metrics across all classes
+  const classLabels = [...new Set(clinicalTrainingData.map(d => d.label))];
+  const perClass: Record<string, { tp: number; fp: number; tn: number; fn: number }> = {};
+  for (const lbl of classLabels) {
+    perClass[lbl] = { tp: 0, fp: 0, tn: 0, fn: 0 };
+  }
 
   for (let fold = 0; fold < k; fold++) {
     const testStart = fold * foldSize;
@@ -248,27 +324,56 @@ function crossValidate(): ModelMetrics {
       if (isCorrect) totalCorrect++;
       totalSamples++;
 
-      if (isCorrect && predicted === testItem.label) totalTP++;
-      else if (!isCorrect && predicted !== testItem.label) totalFP++;
-      if (isCorrect && predicted !== testItem.label) totalTN++;
-      else if (!isCorrect && predicted === testItem.label) totalFN++;
+      // Proper one-vs-rest TP/FP/TN/FN per class (macro averaging)
+      for (const lbl of classLabels) {
+        const actualPos = testItem.label === lbl;
+        const predPos   = predicted === lbl;
+        if (actualPos && predPos)   perClass[lbl].tp++;
+        if (!actualPos && predPos)  perClass[lbl].fp++;
+        if (actualPos && !predPos)  perClass[lbl].fn++;
+        if (!actualPos && !predPos) perClass[lbl].tn++;
+      }
     }
   }
 
+  // Macro-average precision, recall, specificity across all classes
+  let macroPrec = 0, macroRecall = 0, macroSpec = 0;
+  let classCount = 0;
+  for (const lbl of classLabels) {
+    const { tp, fp, tn, fn } = perClass[lbl];
+    const prec = (tp + fp) > 0 ? tp / (tp + fp) : 0;
+    const rec  = (tp + fn) > 0 ? tp / (tp + fn) : 0;
+    const spec = (tn + fp) > 0 ? tn / (tn + fp) : 0;
+    macroPrec   += prec;
+    macroRecall += rec;
+    macroSpec   += spec;
+    classCount++;
+  }
+  if (classCount > 0) {
+    macroPrec   /= classCount;
+    macroRecall /= classCount;
+    macroSpec   /= classCount;
+  }
+
   const accuracy = totalSamples > 0 ? totalCorrect / totalSamples : 0;
-  const precision = totalTP + totalFP > 0 ? totalTP / (totalTP + totalFP) : 0;
-  const recall = totalTP + totalFN > 0 ? totalTP / (totalTP + totalFN) : 0;
-  const f1 = precision + recall > 0 ? 2 * (precision * recall) / (precision + recall) : 0;
-  const specificity = totalTN + totalFP > 0 ? totalTN / (totalTN + totalFP) : 0;
-  const auc = (recall + specificity) / 2;
+  const f1 = (macroPrec + macroRecall) > 0
+    ? 2 * (macroPrec * macroRecall) / (macroPrec + macroRecall)
+    : 0;
+  const auc = (macroRecall + macroSpec) / 2;
+
+  // Sum per-class confusion matrix values for display
+  const totalTP = classLabels.reduce((s, l) => s + perClass[l].tp, 0);
+  const totalFP = classLabels.reduce((s, l) => s + perClass[l].fp, 0);
+  const totalTN = classLabels.reduce((s, l) => s + perClass[l].tn, 0);
+  const totalFN = classLabels.reduce((s, l) => s + perClass[l].fn, 0);
 
   return {
-    accuracy: Math.round(accuracy * 10000) / 100,
-    precision: Math.round(precision * 10000) / 100,
-    recall: Math.round(recall * 10000) / 100,
-    f1Score: Math.round(f1 * 10000) / 100,
-    specificity: Math.round(specificity * 10000) / 100,
-    auc: Math.round(auc * 10000) / 100,
+    accuracy:    Math.round(accuracy    * 10000) / 100,
+    precision:   Math.round(macroPrec   * 10000) / 100,
+    recall:      Math.round(macroRecall * 10000) / 100,
+    f1Score:     Math.round(f1          * 10000) / 100,
+    specificity: Math.round(macroSpec   * 10000) / 100,
+    auc:         Math.round(auc         * 10000) / 100,
     confusionMatrix: { tp: totalTP, fp: totalFP, tn: totalTN, fn: totalFN },
     trainingSamples: clinicalTrainingData.length,
     lastTrained: new Date().toISOString(),
@@ -396,17 +501,18 @@ export function assessPatientRisk(patient: {
   let totalRisk = 0;
   let maxWeight = 0;
 
-  if (patient.age > 65) {
-    factors.push({ factor: "Advanced age (>65 years)", weight: 15, present: true });
+  // Indian/South Asian age risk — chronic diseases develop 5–10 years earlier than Western populations
+  if (patient.age > 60) {
+    factors.push({ factor: "Advanced age (>60 years) — high-risk bracket for Indian adults", weight: 15, present: true });
     totalRisk += 15;
-  } else if (patient.age > 50) {
-    factors.push({ factor: "Age >50 years", weight: 8, present: true });
-    totalRisk += 8;
-  } else if (patient.age > 40) {
-    factors.push({ factor: "Age >40 years", weight: 4, present: true });
-    totalRisk += 4;
+  } else if (patient.age > 45) {
+    factors.push({ factor: "Age >45 years — significant metabolic and CVD risk phase for Indians", weight: 10, present: true });
+    totalRisk += 10;
+  } else if (patient.age > 35) {
+    factors.push({ factor: "Age >35 years — Indian adults enter elevated metabolic risk window", weight: 5, present: true });
+    totalRisk += 5;
   } else {
-    factors.push({ factor: "Young age (<40)", weight: -2, present: true });
+    factors.push({ factor: "Young adult (<35) — lower baseline risk", weight: 0, present: true });
   }
 
   const highRiskConditions: Record<string, number> = {
@@ -414,6 +520,8 @@ export function assessPatientRisk(patient: {
     "chronic kidney disease": 14, "cancer": 18, "hiv": 12, "tuberculosis": 11,
     "liver cirrhosis": 14, "heart failure": 16, "stroke": 15, "asthma": 6,
     "obesity": 8, "anemia": 7, "depression": 5, "epilepsy": 7,
+    "dengue": 6, "malaria": 8, "typhoid": 6, "chikungunya": 5,
+    "fatty liver": 8, "nafld": 8, "metabolic syndrome": 9,
   };
 
   for (const condition of patient.conditions) {
