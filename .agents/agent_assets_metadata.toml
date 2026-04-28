@@ -18,3 +18,15 @@ id = "D6X_shva9sJfrGwwMu1a3"
 uri = "file://screenshots/er-diagram-final.jpg"
 type = "image"
 title = "CarePulse ER Diagram (Final)"
+
+[[outputs]]
+id = "sSv0SPVaXVAsa1Wqm7ATP"
+uri = "file://scripts/carepulse-documentation.pdf"
+type = "pdf"
+title = "CarePulse — Complete Technical Documentation (PDF)"
+
+[[outputs]]
+id = "Uldon7q9l-itVc6PDSr2l"
+uri = "file://scripts/carepulse-project-files.zip"
+type = "unspecified"
+title = "CarePulse — Source Files + Documentation (ZIP)"

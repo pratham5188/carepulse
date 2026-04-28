@@ -41,6 +41,10 @@ packages:
   - scripts
 
 catalog:
+  '@types/archiver': ^6.0.3
+  '@types/pdfkit': ^0.13.9
+  archiver: ^7.0.1
+  pdfkit: ^0.18.0
   '@replit/vite-plugin-cartographer': ^0.5.1
   '@replit/vite-plugin-dev-banner': ^0.1.1
   '@replit/vite-plugin-runtime-error-modal': ^0.0.6

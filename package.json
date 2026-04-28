@@ -10,7 +10,13 @@
   },
   "private": true,
   "devDependencies": {
-    "typescript": "~5.9.2",
-    "prettier": "^3.8.1"
+    "prettier": "^3.8.1",
+    "typescript": "~5.9.2"
+  },
+  "dependencies": {
+    "@types/archiver": "^7.0.0",
+    "@types/pdfkit": "^0.17.6",
+    "archiver": "^7.0.1",
+    "pdfkit": "^0.18.0"
   }
 }
